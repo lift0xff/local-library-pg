@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1 Name: #{author.first_name} #{author.family_name}
+  h2 Genres: #{author.genres.join(', ')}
+  p #[strong Born:] #{author.date_of_birth}
+  if author.date_of_death
+    p #[strong Died:] #{author.date_of_death}
+
+  each book in author.books
+      li
+        a(href=book.url) #{book.title}
+
+
+  hr
+  p
+    a(href=author.url+'/delete') Delete author
+
