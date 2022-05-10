@@ -1,4 +1,22 @@
-var mongoose = require('mongoose');
+const fmtNum = (component, pad = 2) => {
+  return component.toString().padStart(pad, "0");
+};
+class Author {
+  static toView(author) {
+    const viewAuthor = Object.assign({}, author);
+    viewAuthor.url = `/catalog/author/${viewAuthor.id}`;
+    viewAuthor.date_of_birth = `${viewAuthor.date_of_birth
+      .getUTCFullYear()
+      .toString()}-${fmtNum(viewAuthor.date_of_birth.getMonth() + 1)}-${fmtNum(
+      viewAuthor.date_of_birth.getDate()
+    )}`;
+    return viewAuthor;
+  }
+}
+
+module.exports = Author;
+
+/*const sql = require('../db');
 
 var Schema = mongoose.Schema;
 
@@ -49,3 +67,4 @@ AuthorSchema
 
 //Export model
 module.exports = mongoose.model('Author', AuthorSchema);
+*/
